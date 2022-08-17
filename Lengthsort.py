@@ -12,6 +12,6 @@ for charLength in range(1, 46):
                 print(i.strip())
         print(repr(words))
 
-    with open(r"Lengthsorted German\{0}.txt".format(charLength), "w", encoding="utf-8") as w:
+    with open(r"Lengthsorted German/{0}.txt".format(charLength), "w", encoding="utf-8") as w:
         w.write(words)
     words = ""
