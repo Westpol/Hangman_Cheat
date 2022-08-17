@@ -1,7 +1,6 @@
 from colorama import Fore   # For Coloured terminal outputs
 from colorama import Style
-import time     # for delays inbetween Copies
-import os   # for copying the correct wordlist / linux/windows file path compatibility
+import os   # for copying the correct wordlist / Linux/Windows file path compatibility
 
 while 1:                                                            # getting the length of the word
     letterNum = input("How many Letters does the word have?")
