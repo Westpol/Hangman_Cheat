@@ -1,7 +1,7 @@
 from colorama import Fore   # For Coloured terminal outputs
 from colorama import Style
 import time     # for delays inbetween Copies
-import os   # for copying the correct wordlist
+import os   # for copying the correct wordlist / linux/windows file path compatibility
 
 while 1:                                                            # getting the length of the word
     letterNum = input("How many Letters does the word have?")
@@ -12,11 +12,11 @@ while 1:                                                            # getting th
     print(f"{Fore.RED}Wrong Input, Try again.{Style.RESET_ALL}")
 
 
-os.popen(r'copy "Lengthsorted German\{0}.txt"'.format(letterNum) + r' tmp\orig.txt')    # copy all possible words to tmp folder for further usage
+os.popen('copy ' + '"' + os.path.join("Lengthsorted German", "{0}.txt".format(letterNum)) + '"' + r' tmp\orig.txt')    # copy all possible words to tmp folder for further usage
 time.sleep(0.02)    # delay to complete copy
 
 
-with open(r'tmp\orig.txt', encoding="utf-8") as r:  # create string with all lowercase letters
+with open(os.path.join("tmp", "orig.txt"), encoding="utf-8") as r:  # create string with all lowercase letters
     lines = r.readlines()
     newLines = ""
     for i in lines:
@@ -24,14 +24,14 @@ with open(r'tmp\orig.txt', encoding="utf-8") as r:  # create string with all low
     r.close()
 
 
-with open(r'tmp\rest.txt', "w", encoding="utf-8") as w:     # write string to file
+with open(os.path.join("tmp", "rest.txt"), "w", encoding="utf-8") as w:     # write string to file
     w.write(newLines)
     w.close()
 
 
 while 1:
     frequency = [0] * 156  # get most common letter
-    with open(r'tmp\rest.txt', encoding="utf-8") as r:
+    with open(os.path.join("tmp", "rest.txt"), encoding="utf-8") as r:
         lines = r.readlines()
         for i in lines:
             inlul = i.strip()
@@ -60,7 +60,7 @@ while 1:
         if 0 < inn < letterNum:
             indexes.append(inn)
 
-    with open(r'tmp\rest.txt', encoding="utf-8") as r:  # only leave correct words
+    with open(os.path.join("tmp", "rest.txt"), encoding="utf-8") as r:  # only leave correct words
         newLines = ""
         lines = r.readlines()
         if len(indexes) > 0:
@@ -79,6 +79,6 @@ while 1:
                     newLines += i
         r.close()
 
-    with open(r'tmp\rest.txt', "w", encoding="utf-8") as w:     # write correct words to rest.txt
+    with open(os.path.join("tmp", "rest.txt"), "w", encoding="utf-8") as w:     # write correct words to rest.txt
         w.write(newLines)
         w.close()
