@@ -11,10 +11,16 @@ while 1:                                                            # getting th
             break
     print(f"{Fore.RED}Wrong Input, Try again.{Style.RESET_ALL}")
 
+with open(os.path.join("Lengthsorted German", "{0}.txt".format(letterNum)), encoding="utf-8") as r:
+    lines = r.readlines()
+    newLines = ""
+    for i in lines:
+        newLines += i
+    r.close()
 
-os.popen('copy ' + '"' + os.path.join("Lengthsorted German", "{0}.txt".format(letterNum)) + '"' + r' tmp\orig.txt')    # copy all possible words to tmp folder for further usage
-time.sleep(0.02)    # delay to complete copy
-
+with open(os.path.join("tmp", "orig.txt"), "w", encoding="utf-8") as w:
+    w.write(newLines)
+    w.close()
 
 with open(os.path.join("tmp", "orig.txt"), encoding="utf-8") as r:  # create string with all lowercase letters
     lines = r.readlines()
@@ -22,7 +28,6 @@ with open(os.path.join("tmp", "orig.txt"), encoding="utf-8") as r:  # create str
     for i in lines:
         newLines += i.lower()
     r.close()
-
 
 with open(os.path.join("tmp", "rest.txt"), "w", encoding="utf-8") as w:     # write string to file
     w.write(newLines)
