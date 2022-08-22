@@ -2,6 +2,8 @@ from colorama import Fore   # For Coloured terminal outputs
 from colorama import Style
 import os   # for copying the correct wordlist / Linux/Windows file path compatibility
 
+cleared = []
+
 while 1:                                                            # getting the length of the word
     letterNum = input("How many Letters does the word have?")
     if letterNum.isdigit():
@@ -50,7 +52,9 @@ while 1:
         biggestFreq = (0, 0)    # suggest the most common letter
         for i in range(26):
             if frequency[i] > biggestFreq[0]:
-                biggestFreq = (frequency[i], i)
+                if i not in cleared:
+                    biggestFreq = (frequency[i], i)
+        cleared.append(biggestFreq[1])
         print(f"start with {Fore.RED}" + "{0}".format(chr(biggestFreq[1] + 97).capitalize()) + f"{Style.RESET_ALL}")
 
     indexes = []    # get Indexes of most common Letter
