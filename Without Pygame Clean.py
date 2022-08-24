@@ -39,6 +39,7 @@ while 1:
     frequency = [0] * 156  # get most common letter
     with open(os.path.join("tmp", "rest.txt"), encoding="utf-8") as r:
         lines = r.readlines()
+        print(str(len(lines)) + " possible words left")
         for i in lines:
             inlul = i.strip()
             output = []
